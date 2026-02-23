@@ -1,0 +1,107 @@
+{% extends "bakery/base.html" %}
+
+{% block content %}
+
+<style>
+.cart-section{
+    min-height:90vh;
+    background:#fffaf0;
+    padding:50px 20px;
+}
+
+.cart-container{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:40px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+}
+
+.cart-title{
+    text-align:center;
+    margin-bottom:30px;
+    color:#d35400;
+}
+
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.item-name{
+    font-weight:bold;
+}
+
+.item-price{
+    color:#ff7e5f;
+    font-weight:bold;
+}
+
+.btn-remove{
+    background:#ff4d4d;
+    border:none;
+    color:white;
+    padding:8px 14px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+.total{
+    text-align:right;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.btn-checkout{
+    display:block;
+    margin:25px auto 0;
+    background:linear-gradient(45deg,#ff7e5f,#ffb347);
+    border:none;
+    color:white;
+    padding:14px 28px;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+}
+</style>
+
+<section class="cart-section">
+  <div class="cart-container">
+
+    <h2 class="cart-title">🛒 Your Cart</h2>
+
+    {% if items %}
+        {% for item in items %}
+        <div class="cart-item">
+            <span class="item-name">{{ item.product.name }}</span>
+            <span class="item-price">₹ {{ item.product.price }}</span>
+
+            <a href="{% url 'remove_item' item.id %}">
+                <button class="btn-remove">Remove</button>
+            </a>
+        </div>
+        {% endfor %}
+
+        <div class="total">
+            Total: ₹ {{ total }}
+        </div>
+
+        <a href="{% url 'order' %}">
+            <button class="btn-checkout">
+                🍰 Proceed to Order
+            </button>
+        </a>
+
+    {% else %}
+        <p style="text-align:center;">Your cart is empty 🥲</p>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

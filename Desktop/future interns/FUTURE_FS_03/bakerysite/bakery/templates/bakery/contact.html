@@ -1,0 +1,82 @@
+{% extends "bakery/base.html" %}
+
+{% block content %}
+
+<style>
+.contact-section{
+    min-height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#fffaf0,#ffe4e1);
+    padding:40px 20px;
+}
+
+.contact-card{
+    background:#ffffff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    width:100%;
+    max-width:500px;
+    text-align:center;
+}
+
+.contact-card h1{
+    margin-bottom:25px;
+    color:#d2691e;
+}
+
+.contact-card input,
+.contact-card textarea{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:15px;
+}
+
+.contact-card textarea{
+    resize:none;
+    height:120px;
+}
+
+.contact-card button{
+    background:#ff7f50;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    border-radius:25px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.contact-card button:hover{
+    background:#ff5722;
+}
+</style>
+
+<section class="contact-section">
+
+  <div class="contact-card">
+    <h1>Contact Us</h1>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <input type="text" name="name" placeholder="Your Name" required>
+
+      <input type="email" name="email" placeholder="Your Email" required>
+
+      <textarea name="message" placeholder="Your Message"></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+  </div>
+
+</section>
+
+{% endblock %}
